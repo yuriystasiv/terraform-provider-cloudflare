@@ -27,11 +27,8 @@ data "cloudflare_pages_project" "example_pages_project" {
 
 ### Required
 
+- `account_id` (String) The account identifier to target for the resource.
 - `project_name` (String) Name of the project.
-
-### Optional
-
-- `account_id` (String) Identifier.
 
 ### Read-Only
 
