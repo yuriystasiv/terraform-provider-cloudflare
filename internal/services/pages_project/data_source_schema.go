@@ -5,6 +5,7 @@ package pages_project
 import (
 	"context"
 
+	"github.com/cloudflare/terraform-provider-cloudflare/internal/consts"
 	"github.com/cloudflare/terraform-provider-cloudflare/internal/customfield"
 	"github.com/cloudflare/terraform-provider-cloudflare/internal/schemata"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
@@ -35,8 +36,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"account_id": schema.StringAttribute{
-				Description: "Identifier.",
-				Optional:    true,
+				Description: consts.AccountIDSchemaDescription,
+				Required:    true,
 			},
 			"created_on": schema.StringAttribute{
 				Description: "When the project was created.",

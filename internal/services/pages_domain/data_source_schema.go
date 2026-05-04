@@ -5,6 +5,7 @@ package pages_domain
 import (
 	"context"
 
+	"github.com/cloudflare/terraform-provider-cloudflare/internal/consts"
 	"github.com/cloudflare/terraform-provider-cloudflare/internal/customfield"
 	"github.com/cloudflare/terraform-provider-cloudflare/internal/schemata"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -37,8 +38,8 @@ func DataSourceSchema(ctx context.Context) schema.Schema {
 				Required:    true,
 			},
 			"account_id": schema.StringAttribute{
-				Description: "Identifier.",
-				Optional:    true,
+				Description: consts.AccountIDSchemaDescription,
+				Required:    true,
 			},
 			"certificate_authority": schema.StringAttribute{
 				Description: `Available values: "google", "lets_encrypt".`,

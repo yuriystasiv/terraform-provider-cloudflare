@@ -8,6 +8,7 @@ import (
 
 	"github.com/cloudflare/terraform-provider-cloudflare/internal/services/pages_project"
 	"github.com/cloudflare/terraform-provider-cloudflare/internal/test_helpers"
+	datasourceschema "github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 )
 
 func TestPagesProjectDataSourceModelSchemaParity(t *testing.T) {
@@ -16,4 +17,20 @@ func TestPagesProjectDataSourceModelSchemaParity(t *testing.T) {
 	schema := pages_project.DataSourceSchema(context.TODO())
 	errs := test_helpers.ValidateDataSourceModelSchemaIntegrity(model, schema)
 	errs.Report(t)
+}
+
+func TestPagesProjectDataSourceAccountIDRequired(t *testing.T) {
+	t.Parallel()
+	s := pages_project.DataSourceSchema(context.TODO())
+	attr, ok := s.Attributes["account_id"]
+	if !ok {
+		t.Fatalf("account_id attribute missing from schema")
+	}
+	stringAttr, ok := attr.(datasourceschema.StringAttribute)
+	if !ok {
+		t.Fatalf("account_id attribute is %T, want data source schema.StringAttribute", attr)
+	}
+	if !stringAttr.Required {
+		t.Fatalf("account_id should be required")
+	}
 }
